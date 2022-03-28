@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {InfoPageService} from '../../../services/info-page.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  team: any = [];
+
+  constructor(private InfoPageService: InfoPageService) { }
 
   ngOnInit(): void {
+    this.InfoPageService.getInfoTeam()
+     .subscribe((resp: any) => {
+       console.log(resp);
+       this.team = resp;
+     });
   }
 
 }
